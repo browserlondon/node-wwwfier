@@ -1,15 +1,6 @@
 var cluster = require('cluster');
 var express = require('express');
 var http = express.createServer();
-
-http.get('/*', function(req, res, next) {
-
-    if (req.headers.host.match(/^www/) == null ) res.redirect('http://www.' + req.headers.host + req.url, 301);
-    
-    else res.send('URL Not Supported please refer to the documentation', { 'Content-Type': 'text/plain' }, 400);
-
-});
-
 var numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
@@ -22,5 +13,12 @@ if (cluster.isMaster) {
   });
 } else {
     // Worker processes have a http server.
+    http.get('/*', function(req, res, next) {
+
+        if (req.headers.host.match(/^www/) == null ) res.redirect('http://www.' + req.headers.host + req.url, 301);
+
+        else res.send('URL Not Supported please refer to the documentation', { 'Content-Type': 'text/plain' }, 400);
+
+    });
     http.listen(3000);
 }
