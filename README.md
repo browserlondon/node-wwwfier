@@ -45,6 +45,28 @@ You can use curl to send a test string and view the HTTP header you recieve back
     Connection: Keep-Alive
     Date: Tue, 10 Apr 2012 13:36:27 GMT
 
+If you rewuest a host that already has __www.__ prepended the response will look like the following:
+
+    curl -I -H "HOST: www.squarecows.com" http://194.246.109.141
+    
+    HTTP/1.1 301 Moved Permanently
+    X-Powered-By: Express
+    Content-Type: text/html
+    Location: http://squarecows.com/
+    Connection: keep-alive
+
+Note: Don't do something silly and put yourself in a loop!
+
+If you request an invalid Host such as an IP address the response will look like this:
+
+    curl -I -H "HOST: 194.65.86.90" http://194.246.109.141
+    
+    HTTP/1.1 400 Bad Request
+    X-Powered-By: Express
+    Content-Type: text/plain; charset=utf-8
+    Content-Length: 39
+    Connection: keep-alive
+
 #### Testing the hosted service
 
     curl -I -H "HOST: squarecows.com" http://194.246.109.141
@@ -52,4 +74,3 @@ You can use curl to send a test string and view the HTTP header you recieve back
 #### Testing your local service
 
     curl -I -H "HOST: squarecows.com" http://127.0.0.1:3000
-
