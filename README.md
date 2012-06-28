@@ -6,7 +6,7 @@ The service can also be used to strip __www.__ from a URL and uses a 301 to send
 
 ### Requirements
 
-node-wwwfier has been tested on nodejs 0.6.12+ and uses these components:
+node-wwwfier has been tested on nodejs 0.6.12+ and 0.8, it requires these components:
 
     nodejs
     express
