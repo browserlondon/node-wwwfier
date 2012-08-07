@@ -1,6 +1,6 @@
 var cluster = require('cluster');
 var express = require('express');
-var http = express.createServer();
+var http = express();
 var numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
@@ -23,14 +23,14 @@ if (cluster.isMaster) {
         	}
 		// Redirect raw domain to www version of domain
 		else {
-                	res.redirect('http://www.' + req.headers.host + req.url, 301);
+                	res.redirect(301, 'http://www.' + req.headers.host + req.url);
 		}
         }
 	// If the site already has www on the domain strip it and redirect to raw domain
         else if (req.headers.host.match(/^www/) != null ) {
                 var host = req.headers.host;
                 host = host.replace(/^www\.(.+\.)/, '$1');
-                res.redirect('http://' + host + req.url, 301);
+                res.redirect(301, 'http://' + host + req.url);
         }
 	// Catch server errors
         else {

@@ -9,8 +9,10 @@ The service can also be used to strip __www.__ from a URL and uses a 301 to send
 node-wwwfier has been tested on nodejs 0.6.12+ and 0.8, it requires these components:
 
     nodejs
-    express
+    express (v3.0+)
     cluster
+
+As of express 3.0 node-wwwfier is no longer backwardly compatable with early versions of espress due to the syntax of res.redirect changing.
 
 ### Install and Run
 
