@@ -47,7 +47,7 @@ You can use curl to send a test string and view the HTTP header you recieve back
     Connection: Keep-Alive
     Date: Tue, 10 Apr 2012 13:36:27 GMT
 
-If you rewuest a host that already has __www.__ prepended the response will look like the following:
+If you request a host that already has __www.__ prepended the response will look like the following:
 
     curl -I -H "HOST: www.squarecows.com" http://194.246.109.141
     
