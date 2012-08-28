@@ -3,6 +3,15 @@ var express = require('express');
 var http = express();
 var numCPUs = require('os').cpus().length;
 
+// Strip X-Powered-By header for added security
+http.configure(function(){
+    http.use(function (req, res, next) {
+      res.removeHeader("X-Powered-By");
+      next();
+    }); 
+});
+
+// Take advantage of multicore cpu's and run a thread per core
 if (cluster.isMaster) {
     // Fork workers.
     for (var i = 0; i < numCPUs; i++) {
