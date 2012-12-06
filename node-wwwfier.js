@@ -6,6 +6,8 @@ var numCPUs = require('os').cpus().length;
 // Strip X-Powered-By header for added security
 http.configure(function(){
     http.use(function (req, res, next) {
+      res.setHeader("Cache-Control", "public, max-age=300"); // 5 mins
+      res.setHeader("Expires", new Date(Date.now() + 300000).toUTCString());
       res.removeHeader("X-Powered-By");
       next();
     }); 
